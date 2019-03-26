@@ -1,0 +1,10 @@
+.jumbotron{
+    background-image: url('./assets/img1.jpg');
+    background-color:#34495E  ;
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    color:white;
+    letter-spacing:2px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
