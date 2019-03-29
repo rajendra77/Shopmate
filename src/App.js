@@ -4,6 +4,7 @@ import NavigationBar from './components/NavigationBar'
 import NavigationBar2 from './components/NavigationBar2'
 import HomepageImage from './components/HomepageImage'
 import Homepage from './components/Homepage'
+import Departments from './components/Departments'
 export default class App extends React.Component{
 
    constructor(props){
@@ -36,11 +37,12 @@ export default class App extends React.Component{
      
          return(
              <div >
-              
+                
                 <NavigationBar />
                 <NavigationBar2 />
                 <HomepageImage />
-                <Homepage cat={this.state.products}/>
+                <Departments />
+                <Homepage isLoaded={this.state.isLoaded} cat={this.state.products}/>
                
              </div>
 
