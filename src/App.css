@@ -37,3 +37,16 @@
   .Homepage{
     display: flex;
   }
+  li {
+      border:2px solid black;
+      margin:3px;
+      background-color: #34495E;
+      padding-left:20px;
+      color:white;
+  }
+
+  li:hover{
+      background-color: #34495E;
+      color:white;
+      cursor: grab;
+  }

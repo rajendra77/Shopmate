@@ -8,7 +8,8 @@ export default class Sidebar extends React.Component{
     this.state={
          departments:[],
          categories:[],
-         isLoaded:false , 
+         isLoadedCat:false , 
+
     }
 }
 
@@ -28,45 +29,54 @@ componentDidMount() {
             error
           });
         }
-      ).then(
-        fetch('https://backendapi.turing.com/categories')
-         .then(res => res.json())
-         .then(
-           (result) => {
-             this.setState({
-                categories:result
-             })
-           }
-         )
       )
   }
+  
+  showCat= (e) =>{
+   
+   fetch(`https://backendapi.turing.com/categories/inDepartment/${e.currentTarget.dataset.id}`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+                isLoadedCat: true,
+                categories: result
+            });
+          },
+          (error) => {
+            this.setState({
+                isLoadedCat: true,
+              error
+            });
+          }
+        )
+    }
 
     showcatData=()=>{
        
-        if(this.state.isLoaded===true)
+        if(this.state.isLoaded===true )
         {
-           var listItems= this.state.departments.map((item,key)=>{
-           console.log(item.name + "  "+item.description)
-            {
-                return <li>
-                    {item.name}
-                </li> 
+           var listItems= this.state.departments.map((item,key)=>{   
+            {           
+                return <li onClick={this.showCat}  data-id={item.department_id}>
+                          {item.name}
+                      </li> 
             }              
             })
         }
         return <ul>{listItems}</ul>
     }
+
     showcatData2=()=>{
-       
-        if(this.state.isLoaded===true)
+
+        if(this.state.isLoadedCat===true)
         {
-           var listItems= this.state.categories.rows.map((item,key)=>{
-           console.log(item.name + " raj "+item.name)
-            {
-                return <li>
-                    {item.name}
-                </li> 
-            }              
+           var listItems= this.state.categories.map((item,key)=>{  
+              {
+                 return <li>
+                         {item.name}
+                     </li> 
+               }                          
             })
         }
         return <ul>{listItems}</ul>
@@ -76,9 +86,9 @@ componentDidMount() {
         return(
             <div>
                <h2>Departmets</h2>
-               {this.showcatData()}  
+                  {this.showcatData()}  
                <h2>Categories</h2>  
-               {this.showcatData2()}    
+                  {this.showcatData2()}    
             </div>
         )
     }

@@ -4,7 +4,7 @@ export default class Content extends React.Component{
     
     showcatData=()=>{
        
-        if(this.props.isLoaded===true)
+        if(this.props.isLoaded===true && this.props.cat!=[])
         {
            var listItems= this.props.cat.rows.map((item,key)=>{
         
