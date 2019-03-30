@@ -9,7 +9,7 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.recipes__box {
+.product {
     background: #fff;
     padding-bottom: 2rem;
     border-radius: 5px;
@@ -18,11 +18,11 @@
     overflow: hidden;
   }
 
-  .recipe__text {
+  .productText {
     margin-left: 15px;
   }
 
-  .recipes__title {
+  .productTitle {
     color: #e74c3c;
     text-transform: uppercase;
     font-size: 1.1rem;
@@ -32,4 +32,8 @@
   img {
     width: 100%;
     height: 220px;
+  }
+
+  .Homepage{
+    display: flex;
   }

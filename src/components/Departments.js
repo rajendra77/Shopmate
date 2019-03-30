@@ -34,7 +34,7 @@ export default class Departments extends React.Component{
     {
         return(
             <div>
-                <h2>Departmets are</h2>
+                <h2></h2>
                 <Depa items={this.state.items}/>
             </div>
         )
