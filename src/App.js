@@ -12,7 +12,8 @@ export default class App extends React.Component{
             products:[],
             departments:[],
             isLoaded:false ,
-            pageNumber:1,     
+            pageNumber:1,   
+            departmentID:1
        }
    }
    componentDidMount() {
@@ -41,7 +42,6 @@ export default class App extends React.Component{
         
     })
     
-   
       fetch(`https://backendapi.turing.com/products?page=${this.state.pageNumber}`)
         .then(res => res.json())
         .then(
@@ -69,6 +69,32 @@ export default class App extends React.Component{
          </ul>
     )
 }
+
+  getDepartment= (data) =>{
+       this.setState({
+         departmentID:data
+       })
+      if(this.state.departmentID!=0)
+      {
+        fetch(`https://backendapi.turing.com/products/inDepartment/${this.state.departmentID}`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              products: result
+            });
+          },
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          }
+        )
+    }
+  
+  }
     render(){
      
          return(
@@ -77,7 +103,7 @@ export default class App extends React.Component{
                 <NavigationBar />
                 <NavigationBar2 />
                 <HomepageImage />    
-                <Homepage  page={this.state.pageNumber} isLoaded={this.state.isLoaded} cat={this.state.products} />
+                <Homepage getDepartment={this.getDepartment} page={this.state.pageNumber} isLoaded={this.state.isLoaded} cat={this.state.products} />
                   {this.page()}
                  
              </div>

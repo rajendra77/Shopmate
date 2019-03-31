@@ -2,7 +2,6 @@ import React from 'react'
 
 export default class Sidebar extends React.Component{
 
-    
    constructor(props){
     super(props)
     this.state={
@@ -10,8 +9,8 @@ export default class Sidebar extends React.Component{
          categories:[],
          isLoadedCat:false , 
 
+        }
     }
-}
 
 componentDidMount() {
     fetch('https://backendapi.turing.com/departments')
@@ -33,7 +32,8 @@ componentDidMount() {
   }
   
   showCat= (e) =>{
-   
+    this.props.getDepartment(e.currentTarget.dataset.id);
+    
    fetch(`https://backendapi.turing.com/categories/inDepartment/${e.currentTarget.dataset.id}`)
         .then(res => res.json())
         .then(
@@ -92,4 +92,4 @@ componentDidMount() {
             </div>
         )
     }
-}
+ }

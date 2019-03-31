@@ -11,14 +11,13 @@ export default class Content extends React.Component{
             {
                 const img=`https://backendapi.turing.com/images/products/${item.thumbnail}`
             
-                return <div className="col-md-4" style={{marginBottom:"2em"}}> 
+                return <div className="col-md-3" style={{marginBottom:"2em"}}> 
                         <div className="product">
                          <img className="productImg" src={img} alt="new"  />
                           <div className="productText">
                              <p className='productTitle'>{item.name}</p>
-                             <p>Price ${item.price}</p>
-                             <p>discounted price ${item.discounted_price}</p>
-                             <p>{item.description.length<20 ? `${item.description}` : `${item.description.substring(0,80)}...`}</p>
+                             <p className='price'>${item.price}</p>
+                             <p className='discount'>${item.discounted_price>0 ? `${item.discounted_price}` : `${0}`}  </p>
                            </div>
                         </div>
                        </div>    
