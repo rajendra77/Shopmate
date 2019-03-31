@@ -8,7 +8,7 @@ export default class Homepage extends React.Component{
     render(){  
         return(
             <div className='Homepage'>
-                <Sidebar getDepartment={this.props.getDepartment}/>
+                <Sidebar getDepartment={this.props.getDepartment} getCategory={this.props.getCategory}/>
                 <Content page={this.props.pageNumber} isLoaded={this.props.isLoaded} cat={this.props.cat}/>
             </div>
             

@@ -7,8 +7,9 @@ export default class Sidebar extends React.Component{
     this.state={
          departments:[],
          categories:[],
-         isLoadedCat:false , 
-
+         isLoadedCat:false ,
+         activeDepartment:null,
+         activeCategories:null
         }
     }
 
@@ -33,32 +34,55 @@ componentDidMount() {
   
   showCat= (e) =>{
     this.props.getDepartment(e.currentTarget.dataset.id);
+    var position=e.currentTarget.dataset.id
     
+      if(this.state.activeDepartment === position) {
+        this.setState({activeDepartment : null})
+      } else {
+        this.setState({activeDepartment : position})
+      }
+
    fetch(`https://backendapi.turing.com/categories/inDepartment/${e.currentTarget.dataset.id}`)
         .then(res => res.json())
         .then(
           (result) => {
             this.setState({
                 isLoadedCat: true,
-                categories: result
+                categories: result,
             });
           },
           (error) => {
             this.setState({
-                isLoadedCat: true,
-              error
+                isLoadedCat: true,      
+                error
             });
           }
         )
     }
 
+    myColorDepartment = (position) =>{
+        if (this.state.activeDepartment == position) {
+            return "blue";
+          }
+          else
+            return "";
+    }
+    myColorCategories = (position) =>{
+        if (this.state.activeCategories == position) {
+            return "blue";
+          }
+          else
+            return "";
+    }
+
+
     showcatData=()=>{
        
-        if(this.state.isLoaded===true )
+        if(this.state.isLoaded===true)
         {
            var listItems= this.state.departments.map((item,key)=>{   
             {           
-                return <li onClick={this.showCat}  data-id={item.department_id}>
+                return <li style={{background: this.myColorDepartment(item.department_id)}} onClick={this.showCat}  data-id={item.department_id}>
                           {item.name}
                       </li> 
             }              
@@ -73,13 +97,26 @@ componentDidMount() {
         {
            var listItems= this.state.categories.map((item,key)=>{  
               {
-                 return <li>
-                         {item.name}
-                     </li> 
+                 return <li style={{background: this.myColorCategories(item.category_id)}} onClick={this.showCatPro} data-id={item.category_id}>
+                            {item.name}
+                       </li> 
                }                          
             })
         }
         return <ul>{listItems}</ul>
+    }
+
+    showCatPro= (e) =>{
+
+        this.props.getCategory(e.currentTarget.dataset.id);
+
+        var position=e.currentTarget.dataset.id
+    
+      if(this.state.activeCategories === position) {
+        this.setState({activeCategories : null})
+      } else {
+        this.setState({activeCategories : position})
+      }
     }
 
     render(){

@@ -13,7 +13,8 @@ export default class App extends React.Component{
             departments:[],
             isLoaded:false ,
             pageNumber:1,   
-            departmentID:1
+            departmentID:0,
+            categoryID:0,
        }
    }
    componentDidMount() {
@@ -41,7 +42,7 @@ export default class App extends React.Component{
         pageNumber:x,
         
     })
-    
+      
       fetch(`https://backendapi.turing.com/products?page=${this.state.pageNumber}`)
         .then(res => res.json())
         .then(
@@ -71,12 +72,8 @@ export default class App extends React.Component{
 }
 
   getDepartment= (data) =>{
-       this.setState({
-         departmentID:data
-       })
-      if(this.state.departmentID!=0)
-      {
-        fetch(`https://backendapi.turing.com/products/inDepartment/${this.state.departmentID}`)
+      
+        fetch(`https://backendapi.turing.com/products/inDepartment/${data}`)
         .then(res => res.json())
         .then(
           (result) => {
@@ -94,7 +91,28 @@ export default class App extends React.Component{
         )
     }
   
-  }
+  
+  getCategory= (data) =>{
+    
+     fetch(`https://backendapi.turing.com/products/inCategory/${data}`)
+     .then(res => res.json())
+     .then(
+       (result) => {
+         this.setState({
+           isLoaded: true,
+           products: result
+         });
+       },
+       (error) => {
+         this.setState({
+           isLoaded: true,
+           error
+         });
+       }
+     )
+ }
+
+
     render(){
      
          return(
@@ -103,7 +121,7 @@ export default class App extends React.Component{
                 <NavigationBar />
                 <NavigationBar2 />
                 <HomepageImage />    
-                <Homepage getDepartment={this.getDepartment} page={this.state.pageNumber} isLoaded={this.state.isLoaded} cat={this.state.products} />
+                <Homepage getDepartment={this.getDepartment} getCategory={this.getCategory} page={this.state.pageNumber} isLoaded={this.state.isLoaded} cat={this.state.products} />
                   {this.page()}
                  
              </div>
