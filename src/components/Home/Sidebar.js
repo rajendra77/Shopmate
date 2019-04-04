@@ -122,9 +122,9 @@ componentDidMount() {
     render(){
         return(
             <div>
-               <h2>Departmets</h2>
+               <h5>Departmets</h5>
                   {this.showcatData()}  
-               <h2>Categories</h2>  
+               <h5>Categories</h5>  
                   {this.showcatData2()}    
             </div>
         )

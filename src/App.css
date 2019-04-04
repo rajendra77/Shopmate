@@ -67,3 +67,21 @@
      
       font-family:"Comic Sans MS", cursive, sans-serif;
   }
+
+ .addToCart{
+   text-align: center;
+   background-color: rgb(243, 12, 120);
+   margin-left: 50px;
+ }
+ button{
+  text-align: center;
+ }
+
+ .sizeButton{
+   margin-left: 30px;
+   margin-bottom: 10px;
+ }
+ .colorButton{
+  margin-left: 30px;
+  margin-bottom: 10px;
+ }
